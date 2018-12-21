@@ -30,6 +30,12 @@ module.exports = appInfo => {
     // 是否加载到 agent 上，默认关闭
     agent: false,
   };
+
+  exports.security = {
+    csrf: {
+      enable: false,
+    },
+  };
   // add your config here
   config.middleware = [];
 
