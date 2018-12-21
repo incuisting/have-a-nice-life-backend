@@ -4,9 +4,9 @@
 // exports.static = true;
 exports.nunjucks = {
   enabled: true,
-  package: 'egg-view-nunjucks'
+  package: 'egg-view-nunjucks',
 };
 exports.validate = {
   enabled: true,
-  package: 'egg-validate'
+  package: 'egg-validate',
 };
