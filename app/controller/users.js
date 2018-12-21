@@ -11,10 +11,10 @@ const createRule = {
 class UsersController extends Controller {
   async index() {
     const ctx = this.ctx;
-    // const users = await ctx.service.users.query();
-    // ctx.body = {
-    //   users,
-    // };
+    const users = await ctx.service.users.query();
+    ctx.body = {
+      users,
+    };
     ctx.status = 200;
   }
   async create() {

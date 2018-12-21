@@ -2,10 +2,12 @@
 const Service = require('egg').Service;
 const url = require('url');
 const qs = require('querystring');
+const moment = require('moment');
 class UsersService extends Service {
-  async index() {
-    const ctx = this.ctx;
-    ctx.body = 'success';
+  async query() {
+    const date = moment().format('YYYY-MM-DD');
+    const list = await this.app.mysql.get('user', { queue_date: date });
+    return list;
   }
   async create(params) {
     /**
@@ -13,8 +15,7 @@ class UsersService extends Service {
      * 获取昵称 存入数据库
      */
     const insertData = this.getInsertData(params);
-    const result = await this.app.mysql.insert('user', insertData);
-    console.log('insertData', result);
+    await this.app.mysql.insert('user', insertData);
     return 'success';
   }
   getInsertData(params) {
