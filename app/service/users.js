@@ -5,8 +5,10 @@ const qs = require('querystring');
 const moment = require('moment');
 class UsersService extends Service {
   async query() {
-    // const date = moment().format('YYYY-MM-DD');
-    const list = await this.app.mysql.get('user');
+    const list = await this.app.mysql.select('user');
+    list.forEach(i => {
+      i.queue_date = moment(list.queue_date).format('YYYY-MM-DD');
+    });
     return list;
   }
   async create(params) {
@@ -16,7 +18,6 @@ class UsersService extends Service {
      */
     const { mysql } = this.app;
     const insertData = this.getInsertData(params);
-    console.log('insertData', insertData);
     try {
       await mysql.insert('user', insertData);
     } catch (e) {

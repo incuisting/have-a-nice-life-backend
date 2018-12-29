@@ -15,16 +15,17 @@ class UsersController extends Controller {
     ctx.body = {
       users,
     };
-    ctx.status = users.status ? 200 : 400;
+    ctx.status = 200;
   }
   async create() {
     const ctx = this.ctx;
     ctx.validate(createRule, ctx.request.body);
-    const id = await ctx.service.users.create(ctx.request.body);
+    const result = await ctx.service.users.create(ctx.request.body);
     ctx.body = {
-      id,
+      result,
     };
     ctx.status = 201;
+    ctx.status = result.status ? 201 : 400;
   }
 }
 module.exports = UsersController;
