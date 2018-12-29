@@ -15,7 +15,7 @@ class UsersController extends Controller {
     ctx.body = {
       users,
     };
-    ctx.status = 200;
+    ctx.status = users.status ? 200 : 400;
   }
   async create() {
     const ctx = this.ctx;
