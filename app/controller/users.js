@@ -13,7 +13,7 @@ class UsersController extends Controller {
     const ctx = this.ctx;
     const users = await ctx.service.users.query();
     ctx.body = {
-      users,
+      data: users,
     };
     ctx.status = 200;
   }
@@ -22,9 +22,8 @@ class UsersController extends Controller {
     ctx.validate(createRule, ctx.request.body);
     const result = await ctx.service.users.create(ctx.request.body);
     ctx.body = {
-      result,
+      data: result,
     };
-    ctx.status = 201;
     ctx.status = result.status ? 201 : 400;
   }
 }
