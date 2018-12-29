@@ -22,11 +22,11 @@ class UsersService extends Service {
       await mysql.insert('user', insertData);
     } catch (e) {
       if (e.code === 'ER_DUP_ENTRY') {
-        return { msg: 'same day had a apply', status: false };
+        this.ctx.throw(400, 'same day had a apply');
       }
-      console.error(e);
+      this.ctx.throw(e);
     }
-    return { msg: 'insert success', status: true };
+    return { msg: 'insert success' };
   }
   getInsertData(params) {
     const result = {};

@@ -24,7 +24,7 @@ class UsersController extends Controller {
     ctx.body = {
       data: result,
     };
-    ctx.status = result.status ? 201 : 400;
+    ctx.status = 201;
   }
 }
 module.exports = UsersController;
