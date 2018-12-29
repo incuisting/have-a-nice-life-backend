@@ -28,6 +28,26 @@ class UsersService extends Service {
     }
     return { msg: 'insert success' };
   }
+  async update(id, params) {
+    const { mysql } = this.app;
+    try {
+      await mysql.update('user', params, {
+        where: { open_id: id },
+      });
+    } catch (e) {
+      this.ctx.throw(500, e);
+    }
+    return 'update success';
+  }
+  async delete(id) {
+    const { mysql } = this.app;
+    try {
+      await mysql.delete('user', { open_id: id });
+    } catch (e) {
+      this.ctx.throw(500, e);
+    }
+    return 'delete success';
+  }
   getInsertData(params) {
     const result = {};
     const query = qs.parse(url.parse(params.url).query);
